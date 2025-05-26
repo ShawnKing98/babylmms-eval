@@ -4,6 +4,7 @@ dataset_kwargs:
 task: vtwt
 test_split: train
 output_type: multiple_choice
+target_delimiter: " "
 doc_to_visual: !function utils.vtwt_doc_to_visual
 doc_to_text: !function utils.vtwt_doc_to_text
 doc_to_target: !function utils.vtwt_doc_to_target
@@ -17,8 +18,9 @@ lmms_eval_specific_kwargs:
   default:
     pre_prompt: ""
     post_prompt: ""
-  # llava:
-  #   pre_prompt: "blablabla"
-  #   post_prompt: "hohoho"
+  llava:
+    pre_prompt: "USER: What's the object in the image? <image> ASSISTANT:"
+    post_prompt: ""
+
 metadata:
   - version: 0.0

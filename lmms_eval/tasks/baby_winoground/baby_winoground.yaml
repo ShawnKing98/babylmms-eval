@@ -4,6 +4,7 @@ dataset_kwargs:
 task: baby_winoground
 test_split: train
 output_type: multiple_choice
+target_delimiter: " "
 doc_to_visual: !function utils.baby_winoground_doc_to_visual
 doc_to_text: !function utils.baby_winoground_doc_to_text
 doc_to_target: !function utils.baby_winoground_doc_to_target
@@ -11,17 +12,20 @@ doc_to_choice: !function utils.baby_winoground_doc_to_choice
 process_results: !function utils.baby_winoground_process_results
 metric_list:
   - metric: image_score
-    aggregation: !function utils.baby_winoground_aggregation_image_score
+    aggregation: !function utils.baby_winoground_aggregate_image_score
     higher_is_better: true
   - metric: text_score
-    aggregation: !function utils.baby_winoground_aggregation_text_score
+    aggregation: !function utils.baby_winoground_aggregate_text_score
     higher_is_better: true
   - metric: group_score
-    aggregation: !function utils.baby_winoground_aggregation_group_score
+    aggregation: !function utils.baby_winoground_aggregate_group_score
     higher_is_better: true
 lmms_eval_specific_kwargs:
   default:
     pre_prompt: ""
+    post_prompt: ""
+  llava:
+    pre_prompt: "USER: What's the object in the image? <image> ASSISTANT:"
     post_prompt: ""
 metadata:
   - version: 0.0 

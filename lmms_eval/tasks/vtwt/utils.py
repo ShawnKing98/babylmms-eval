@@ -24,7 +24,7 @@ def vtwt_doc_to_choice(doc):
     return [doc["positive_phrase"], doc["negative_phrase"]]
 
 def vtwt_process_results(doc, results):
-    # results: list of (loss, is_greedy) for each choice
+    # results: list of (loss, is_greedy) for two choices
     pred = int(min(range(len(results)), key=lambda i: results[i][0]))
     gold = 0  # positive_phrase is always the ground truth (index 0)
     acc = 1.0 if pred == gold else 0.0

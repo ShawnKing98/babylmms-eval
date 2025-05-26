@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 import torch
+
 def baby_winoground_doc_to_visual(doc, lmms_eval_specific_kwargs=None):
     # Returns a loaded image
     if doc["image_tag"] == "positive":
@@ -54,17 +55,18 @@ def get_loss_matrix(items):
         loss_matrix[i, 1, 1] = item["img1_phrase1_loss"]
     return loss_matrix
     
-def baby_winoground_aggregation_image_score(items):
+def baby_winoground_aggregate_image_score(items):
+    # items: list of dicts, returned by process_results
     loss_matrix = get_loss_matrix(items)
     image_score = (loss_matrix[:, 0, 0] < loss_matrix[:, 1, 0]) & (loss_matrix[:, 1, 1] < loss_matrix[:, 0, 1])
     return image_score.float().mean().item()
 
-def baby_winoground_aggregation_text_score(items):
+def baby_winoground_aggregate_text_score(items):
     loss_matrix = get_loss_matrix(items)
     text_score = (loss_matrix[:, 0, 0] < loss_matrix[:, 0, 1]) & (loss_matrix[:, 1, 1] < loss_matrix[:, 1, 0])
     return text_score.float().mean().item()
 
-def baby_winoground_aggregation_group_score(items):
+def baby_winoground_aggregate_group_score(items):
     loss_matrix = get_loss_matrix(items)
     group_score = (loss_matrix[:, 0, 0] < loss_matrix[:, 1, 0]) & (loss_matrix[:, 1, 1] < loss_matrix[:, 0, 1]) \
         & (loss_matrix[:, 0, 0] < loss_matrix[:, 0, 1]) & (loss_matrix[:, 1, 1] < loss_matrix[:, 1, 0])
