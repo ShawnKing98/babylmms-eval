@@ -1,0 +1,25 @@
+dataset_path: csv
+dataset_kwargs:
+  data_files: dataset/SAYCam_caption/SAYCam_caption.csv
+task: saycam_caption
+test_split: train
+output_type: generate_until
+doc_to_visual: !function utils.saycam_caption_doc_to_visual
+doc_to_text: !function utils.saycam_caption_doc_to_text
+doc_to_target: text
+generation_kwargs:
+  max_new_tokens: 25
+process_results: !function utils.saycam_caption_process_result
+lmms_eval_specific_kwargs:
+  default:
+    pre_prompt: ""
+    post_prompt: ""
+  llava:
+    pre_prompt: "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nSay a short sentence to a child about this image, as if you are directly speaking to the child. ASSISTANT: "
+    post_prompt: ""
+metric_list:
+  - metric: meteor
+    aggregation: !function utils.saycam_caption_aggregation_result
+    higher_is_better: true
+metadata:
+  - version: 0.0 
