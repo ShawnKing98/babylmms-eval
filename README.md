@@ -1,250 +1,263 @@
-<p align="center" width="80%">
-<img src="https://i.postimg.cc/KvkLzbF9/WX20241212-014400-2x.png"  width="100%" height="70%">
-</p>
+# BabyVLM: Data-Efficient Pretraining of VLMs Inspired by Infant Learning
 
-# The Evaluation Suite of Large Multimodal Models 
-
-[![PyPI](https://img.shields.io/pypi/v/lmms-eval)](https://pypi.org/project/lmms-eval)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/lmms-eval)
-![GitHub contributors](https://img.shields.io/github/contributors/EvolvingLMMs-Lab/lmms-eval)
-[![issue resolution](https://img.shields.io/github/issues-closed-raw/EvolvingLMMs-Lab/lmms-eval)](https://github.com/EvolvingLMMs-Lab/lmms-eval/issues)
-[![open issues](https://img.shields.io/github/issues-raw/EvolvingLMMs-Lab/lmms-eval)](https://github.com/EvolvingLMMs-Lab/lmms-eval/issues)
-
-> Accelerating the development of large multimodal models (LMMs) with `lmms-eval`
-
-🏠 [LMMs-Lab Homepage](https://www.lmms-lab.com/) | 🤗 [Huggingface Datasets](https://huggingface.co/lmms-lab) | <a href="https://emoji.gg/emoji/1684-discord-thread"><img src="https://cdn3.emoji.gg/emojis/1684-discord-thread.png" width="14px" height="14px" alt="Discord_Thread"></a> [discord/lmms-eval](https://discord.gg/zdkwKUqrPy)
-
-📖 [Supported Tasks (90+)](https://github.com/EvolvingLMMs-Lab/lmms-eval/blob/main/docs/current_tasks.md) | 🌟 [Supported Models (30+)](https://github.com/EvolvingLMMs-Lab/lmms-eval/tree/main/lmms_eval/models) | 📚 [Documentation](docs/README.md)
-
----
-
-## Annoucement
-
-- [2025-04] 🚀🚀 Introducing Aero-1-Audio — a compact yet mighty audio model. We have officially supports evaluation for Aero-1-Audio and it supports batched evaluations! Feel free to try out.
-
-- [2025-02] 🚀🚀 We have integrated [`vllm`](https://github.com/EvolvingLMMs-Lab/lmms-eval/pull/544) into our models, enabling accelerated evaluation for both multimodal and language models. Additionally, we have incorporated [`openai_compatible`](https://github.com/EvolvingLMMs-Lab/lmms-eval/pull/546) to support the evaluation of any API-based model that follows the OpenAI API format. Check the usages [here](https://github.com/EvolvingLMMs-Lab/lmms-eval/tree/main/miscs/model_dryruns).
-
-- [2025-01] 🎓🎓 We have released our new benchmark: [Video-MMMU: Evaluating Knowledge Acquisition from Multi-Discipline Professional Videos](https://arxiv.org/abs/2501.13826). Please refer to the [project page](https://videommmu.github.io/) for more details.
-
-- [2024-12] 🎉🎉 We have presented [MME-Survey: A Comprehensive Survey on Evaluation of Multimodal LLMs](https://arxiv.org/pdf/2411.15296), jointly with [MME Team](https://github.com/BradyFU/Video-MME) and [OpenCompass Team](https://github.com/open-compass).
-
-- [2024-11] 🔈🔊 The `lmms-eval/v0.3.0` has been upgraded to support audio evaluations for audio models like Qwen2-Audio and Gemini-Audio across tasks such as AIR-Bench, Clotho-AQA, LibriSpeech, and more. Please refer to the [blog](https://github.com/EvolvingLMMs-Lab/lmms-eval/blob/main/docs/lmms-eval-0.3.md) for more details!
-
-<details>
-<summary>We warmly welcome contributions from the open-source community! Below is a chronological list of recent tasks, models, and features added by our amazing contributors. </summary>
-
-- [2024-10] 🎉🎉 We welcome the new task [NaturalBench](https://huggingface.co/datasets/BaiqiL/NaturalBench), a vision-centric VQA benchmark (NeurIPS'24) that challenges vision-language models with simple questions about natural imagery.
-- [2024-10] 🎉🎉 We welcome the new task [TemporalBench](https://huggingface.co/datasets/microsoft/TemporalBench) for fine-grained temporal understanding and reasoning for videos, which reveals a huge (>30%) human-AI gap.
-- [2024-10] 🎉🎉 We welcome the new tasks [VDC](https://rese1f.github.io/aurora-web/) for video detailed captioning, [MovieChat-1K](https://rese1f.github.io/MovieChat/) for long-form video understanding, and [Vinoground](https://vinoground.github.io/), a temporal counterfactual LMM benchmark composed of 1000 short natural video-caption pairs. We also welcome the new models: [AuroraCap](https://github.com/rese1f/aurora) and [MovieChat](https://github.com/rese1f/MovieChat).
-- [2024-09] 🎉🎉 We welcome the new tasks [MMSearch](https://mmsearch.github.io/) and [MME-RealWorld](https://mme-realworld.github.io/) for inference acceleration
-- [2024-09] ⚙️️⚙️️️️ We upgrade `lmms-eval` to `0.2.3` with more tasks and features. We support a compact set of language tasks evaluations (code credit to [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness)), and we remove the registration logic at start (for all models and tasks) to reduce the overhead. Now `lmms-eval` only launches necessary tasks/models. Please check the [release notes](https://github.com/EvolvingLMMs-Lab/lmms-eval/releases/tag/v0.2.3) for more details.
-- [2024-08] 🎉🎉 We welcome the new model [LLaVA-OneVision](https://huggingface.co/papers/2408.03326), [Mantis](https://github.com/EvolvingLMMs-Lab/lmms-eval/pull/162), new tasks [MVBench](https://huggingface.co/datasets/OpenGVLab/MVBench), [LongVideoBench](https://github.com/EvolvingLMMs-Lab/lmms-eval/pull/117), [MMStar](https://github.com/EvolvingLMMs-Lab/lmms-eval/pull/158). We provide new feature of SGlang Runtime API for llava-onevision model, please refer the [doc](https://github.com/EvolvingLMMs-Lab/lmms-eval/blob/main/docs/commands.md) for inference acceleration
-- [2024-07] 👨‍💻👨‍💻 The `lmms-eval/v0.2.1` has been upgraded to support more models, including [LongVA](https://github.com/EvolvingLMMs-Lab/LongVA), [InternVL-2](https://github.com/OpenGVLab/InternVL), [VILA](https://github.com/NVlabs/VILA), and many more evaluation tasks, e.g. [Details Captions](https://github.com/EvolvingLMMs-Lab/lmms-eval/pull/136), [MLVU](https://arxiv.org/abs/2406.04264), [WildVision-Bench](https://huggingface.co/datasets/WildVision/wildvision-arena-data), [VITATECS](https://github.com/lscpku/VITATECS) and [LLaVA-Interleave-Bench](https://llava-vl.github.io/blog/2024-06-16-llava-next-interleave/).
-- [2024-07] 🎉🎉 We have released the [technical report](https://arxiv.org/abs/2407.12772) and [LiveBench](https://huggingface.co/spaces/lmms-lab/LiveBench)! 
-- [2024-06] 🎬🎬 The `lmms-eval/v0.2.0` has been upgraded to support video evaluations for video models like LLaVA-NeXT Video and Gemini 1.5 Pro across tasks such as EgoSchema, PerceptionTest, VideoMME, and more. Please refer to the [blog](https://lmms-lab.github.io/posts/lmms-eval-0.2/) for more details!
-- [2024-03] 📝📝 We have released the first version of `lmms-eval`, please refer to the [blog](https://lmms-lab.github.io/posts/lmms-eval-0.1/) for more details!
-
-</details>
-
-## Why `lmms-eval`?
-
-We're on an exciting journey toward creating Artificial General Intelligence (AGI), much like the enthusiasm of the 1960s moon landing. This journey is powered by advanced large language models (LLMs) and large multimodal models (LMMs), which are complex systems capable of understanding, learning, and performing a wide variety of human tasks.
-
-To gauge how advanced these models are, we use a variety of evaluation benchmarks. These benchmarks are tools that help us understand the capabilities of these models, showing us how close we are to achieving AGI. However, finding and using these benchmarks is a big challenge. The necessary benchmarks and datasets are spread out and hidden in various places like Google Drive, Dropbox, and different school and research lab websites. It feels like we're on a treasure hunt, but the maps are scattered everywhere.
-
-In the field of language models, there has been a valuable precedent set by the work of [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). They offer integrated data and model interfaces, enabling rapid evaluation of language models and serving as the backend support framework for the [open-llm-leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard), and has gradually become the underlying ecosystem of the era of foundation models.
-
-We humbly obsorbed the exquisite and efficient design of [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) and introduce **lmms-eval**, an evaluation framework meticulously crafted for consistent and efficient evaluation of LMM.
-
-## Installation
-
-For direct usage, you can install the package from Git by running the following command:
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-uv venv eval
-uv venv --python 3.12
-source eval/bin/activate
-uv pip install git+https://github.com/EvolvingLMMs-Lab/lmms-eval.git
-```
-
-For development, you can install the package by cloning the repository and running the following command:
-```bash
-git clone https://github.com/EvolvingLMMs-Lab/lmms-eval
-cd lmms-eval
-uv venv dev
-source dev/bin/activate
-uv pip install -e .
-```
-
-<details>
-<summary>Reproduction of LLaVA-1.5's paper results</summary>
-
-You can check the [environment install script](miscs/repr_scripts.sh) and [torch environment info](miscs/repr_torch_envs.txt) to **reproduce LLaVA-1.5's paper results**. We found torch/cuda versions difference would cause small variations in the results, we provide the [results check](miscs/llava_result_check.md) with different environments.
-
-</details>
-
-If you want to test on caption dataset such as `coco`, `refcoco`, and `nocaps`, you will need to have `java==1.8.0` to let pycocoeval api to work. If you don't have it, you can install by using conda
-```
-conda install openjdk=8
-```
-you can then check your java version by `java -version` 
+[[Paper]](https://arxiv.org/abs/2504.09426) [[Project Page]](https://shawnking98.github.io/BabyVLM/)
+<img width="100%" src="assets/main_figure_v3.jpg">
 
 
-<details>
-<summary>Comprehensive Evaluation Results of LLaVA Family Models</summary>
-<br>
+[Shengao Wang](https://www.linkedin.com/in/shengao-wang-a259aa173/en)<sup>1</sup>,
+[Arjun Chandra](https://www.linkedin.com/in/arjun-chandra2/)<sup>1</sup>,
+[Aoming Liu](https://cs-people.bu.edu/amliu/)<sup>1</sup>
+[Venkatesh Saligrama](https://venkatesh-saligrama.github.io/)<sup>1</sup>
+[Boqing Gong](http://boqinggong.info/)<sup>1</sup>
 
-As demonstrated by the extensive table below, we aim to provide detailed information for readers to understand the datasets included in lmms-eval and some specific details about these datasets (we remain grateful for any corrections readers may have during our evaluation process).
+<sup>1</sup>Boston University
 
-We provide a Google Sheet for the detailed results of the LLaVA series models on different datasets. You can access the sheet [here](https://docs.google.com/spreadsheets/d/1a5ImfdKATDI8T7Cwh6eH-bEsnQFzanFraFUgcS9KHWc/edit?usp=sharing). It's a live sheet, and we are updating it with new results.
+### Abstract
 
-<p align="center" width="100%">
-<img src="https://i.postimg.cc/jdw497NS/WX20240307-162526-2x.png"  width="100%" height="80%">
-</p>
+Human infants rapidly develop visual reasoning skills from minimal input, suggesting that developmentally inspired pretraining could significantly enhance the efficiency of vision-language models (VLMs). Although recent efforts have leveraged infant-inspired datasets like SAYCam, existing evaluation benchmarks remain misaligned--they are either too simplistic, narrowly scoped, or tailored for large-scale pretrained models. Additionally, training exclusively on infant data overlooks the broader, diverse input from which infants naturally learn. To address these limitations, we propose BabyVLM, a novel framework comprising comprehensive in-domain evaluation benchmarks and a synthetic training dataset created via child-directed transformations of existing datasets. We demonstrate that VLMs trained with our synthetic dataset achieve superior performance on BabyVLM tasks compared to models trained solely on SAYCam or general-purpose data of the SAYCam size. BabyVLM thus provides a robust, developmentally aligned evaluation tool and illustrates how compact models trained on carefully curated data can generalize effectively, opening pathways toward data-efficient vision-language learning paradigms.
 
-We also provide the raw data exported from Weights & Biases for the detailed results of the LLaVA series models on different datasets. You can access the raw data [here](https://docs.google.com/spreadsheets/d/1AvaEmuG4csSmXaHjgu4ei1KBMmNNW8wflOD_kkTDdv8/edit?usp=sharing).
+## Environment Setup
 
-</details>
-<br>
+- For all hierarchical evaluations, please follow the official setups to install the conda environments seperately.
 
-If you want to test [VILA](https://github.com/NVlabs/VILA), you should install the following dependencies:
+    - [LLaVA-OV](https://github.com/LLaVA-VL/LLaVA-NeXT)
+    - [InternVL2.5&3](https://github.com/OpenGVLab/InternVL/tree/main)
+    - [Qwen2.5-VL](https://github.com/QwenLM/Qwen2.5-VL)
+    - [GPT-4o](https://github.com/openai/openai-python)
+    - [OpenCLIP](https://github.com/mlfoundations/open_clip)
+    - [SigLIP](https://huggingface.co/docs/transformers/main/en/model_doc/siglip)
+
+- For LoRA-finetuning on Qwen2.5-VL-7B, we use the [Qwen2-VL-Finetune](https://github.com/2U1/Qwen2-VL-Finetune). Please run the following command to install the training conda environment:
+
+    ```bash
+    cd finetuning
+    conda env create -f environment.yaml
+    conda activate qwen_train
+    pip install qwen-vl-utils
+    pip install flash-attn --no-build-isolation
+    ``` 
+
+- For evaluation on general VQA benchmarks, please follow [VLMEvalKit](https://github.com/open-compass/VLMEvalKit) to install the environment.
+
+- By default, we use [flash-attention](https://github.com/Dao-AILab/flash-attention) during all evaluations.
+
+- Experiments are conducted on a wide range of GPUs, including A100, A40, L40, L40S and A6000 with CUDA 12.5.
+
+## Data Preparation
+
+### Step 1
+We use four datasets to form 6 taxonomies.
+Please download the image data from the following links and put them in the `data/images` directory.
+
+- [Inaturalist2021](https://github.com/visipedia/inat_comp/tree/master/2021)
+- [ImageNet-1K](https://huggingface.co/datasets/ILSVRC/imagenet-1k)
+- [CUB-200-2021](https://www.vision.caltech.edu/datasets/cub_200_2011/)
+- [Food-101](https://www.kaggle.com/datasets/dansbecker/food-101)
+
+### Step 2
+
+
+| **Taxonomy**            | **Path (Similar Choice)** |
+|----------------------|------------|
+| iNat21-Plant         | data/annotations/similar_choices/inat21_plantae_with_similar_choice.jsonl |
+| iNat21-Animal        | data/annotations/similar_choices/inat21_animalia_with_similar_choice.jsonl |
+| ImgNet-Animal        | data/annotations/similar_choices/imagenet_animal_with_similar_choice.jsonl |
+| ImgNet-Artifact      | data/annotations/similar_choices/imagenet_artifact_with_similar_choice.jsonl |
+| CUB-200-2021         | data/annotations/similar_choices/CUB200_with_similar_choice.jsonl |
+| Food-101             | data/annotations/similar_choices/Food101_with_similar_choice.jsonl |
+
+The annotation files with random choices are provided in the `data/annotations/random_choices` directory.
+
+For each dataset file in the `data/annotations` directory and the `data/training/train_plant_img.json` file, please replace the image_path with your local path (a helper script is provided in `utils/replace_image_path.py`).
+
+## Model Preparation
+
+Please download the model checkpoints from the following links or just specify the model names when running scripts.
+
+
+### VLMs
+
+| **VLMs**            | **Source** |
+|----------------------|------------|
+| LLaVA-OV-7B          | [lmms-lab/llava-onevision-qwen2-7b-ov](https://huggingface.co/lmms-lab/llava-onevision-qwen2-7b-ov) |
+| InternVL2.5-8B       | [OpenGVLab/InternVL2_5-8B](https://huggingface.co/OpenGVLab/InternVL2_5-8B) |
+| InternVL3-8B         | [OpenGVLab/InternVL3-8B](https://huggingface.co/OpenGVLab/InternVL3-8B) |
+| Qwen2.5-VL-7B        | [Qwen/Qwen2.5-VL-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) |
+| Qwen2.5-VL-32B       | [Qwen/Qwen2.5-VL-32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-32B-Instruct) |
+| Qwen2.5-VL-72B       | [Qwen/Qwen2.5-VL-72B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct) |
+| OpenCLIP             | [laion/CLIP-ViT-L-14-laion2B-s32B-b82K](https://huggingface.co/laion/CLIP-ViT-L-14-laion2B-s32B-b82K) |
+| SigLIP               | [google/siglip-so400m-patch14-384](https://huggingface.co/google/siglip-so400m-patch14-384) |
+
+### Original LLMs (OG LLMs)
+
+| **OG LLMs**            | **Source** |
+|----------------------|------------|
+| Qwen2.5-Instruct-7B   | [Qwen/Qwen2.5-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-7B-Instruct) |
+| Qwen2-Instruct-7B     | [Qwen/Qwen2-7B-Instruct](https://huggingface.co/Qwen/Qwen2-7B-Instruct) |
+| Qwen2.5-7B           | [Qwen/Qwen2.5-7B](https://huggingface.co/Qwen/Qwen2.5-7B) |
+| InternLM-2.5-7B      | [InternLM/InternLM-2.5-7B](https://huggingface.co/internlm/internlm2_5-7b-chat) |
+
+## Metrics
+
+To get the results over all metrics, please use `utils/metric.py`.
 
 ```bash
-pip install s2wrapper@git+https://github.com/bfshi/scaling_on_scales
+python utils/metric.py --file_path eval_results --cub # only specify cub=True if you use CUB dataset
 ```
 
-Our Development will be continuing on the main branch, and we encourage you to give us feedback on what features are desired and how to improve the library further, or ask questions, either in issues or PRs on GitHub.
 
-## Usages
+## Evaluation on Hierarchical Image Classification Benchmarks
 
-> More examples can be found in [examples/models](examples/models)
-
-**Evaluation of OpenAI-Compatible Model**
+To reproduce the results on hierarchical image classification benchmarks, please run the following command:
 
 ```bash
-bash examples/models/openai_compatible.sh
-bash examples/models/xai_grok.sh
+bash scripts/all_image_benchmarks.sh # Please specify the output file path and model path in internvl python scripts
 ```
 
-**Evaluation of vLLM**
+
+## Evaluation on Hierarchical Text-only Classification Benchmarks
+
+
+To reproduce the results on hierarchical text-only classification benchmarks, please run the following command:
 
 ```bash
-bash examples/models/vllm_qwen2vl.sh
+bash scripts/all_text_benchmarks.sh # Please specify the output file path and model path in internvl python scripts
 ```
 
-**Evaluation of LLaVA-OneVision**
+## Evaluation on Hierarchical Text-only Classification Benchmarks using OG LLMs
+
+To reproduce the results on hierarchical text-only classification benchmarks using OG LLMs, please run the following command:
 
 ```bash
-bash examples/models/llava_onevision.sh
+bash scripts/all_og_llm_on_text.sh # Please specify the output file path and model path in internvl python scripts
 ```
 
-**Evaluation of LLaMA-3.2-Vision**
+## Prompt Engineering
+
+### Prompt Variants
+
+For each scripts in `evaluation/`, we provide five different prompt variants. You can evaluate on different prompt variants by specifiying the `--prompt_order` argument.
+
+### Chain-of-Thought Prompt
+
+- Simple Chain-of-Thought Prompt 
+    ```bash
+    bash scripts/vlm_cot.sh
+    ```
+
+- Taxonomy-based Chain-of-Thought Prompt
+
+    ```bash
+    bash scripts/bio_cot_pmt.sh
+    ```
+
+### Taxonomy-based Prompt
+
+Taxonomy-based prompt are evalauated on CUB-200 using Qwen2.5-VL-7B-Instruct, InternVL2.5-8B and LLaVA-OV-7B. Please run the following script to reproduce the results:
 
 ```bash
-bash examples/models/llama_vision.sh
+bash scripts/tax_pmt.sh
 ```
 
-**Evaluation of Qwen2-VL**
+### Binary Answer Prompt
 
 ```bash
-bash examples/models/qwen2_vl.sh
-bash examples/models/qwen2_5_vl.sh
+python /projectnb/ivc-ml/yuwentan/LLaVA-NeXT/QWEN_EVAL/eval_CUB_binary.py --output_file path/to/output/file --model_path /path/to/model --test_set data/annotations/similar_choices/CUB200_with_similar_choice.jsonl
 ```
-
-**Evaluation of LLaVA on MME**
-
-If you want to test LLaVA 1.5, you will have to clone their repo from [LLaVA](https://github.com/haotian-liu/LLaVA) and
+Note: Please use `utils/metric_binary.py` to get the results over all metrics by running the following command:
 
 ```bash
-bash examples/models/llava_next.sh
+python utils/metric_binary.py --file_path path/to/output/file
 ```
 
-**Evaluation with tensor parallel for bigger model (llava-next-72b)**
+### VLM Probing
+
+To generatet the image features from vision encoder, please install transformers from source using `transformers==4.50.0.dev0`.
+Replace the `transformers/src/transformers/models/qwen2_5_vl/modeling_qwen2_5_vl.py` with the one in `probing/modeling_qwen2_5_vl.py` and then `pip install -e .`.
+
+Then, generate the image features from vision encoder, projector using the following command:
 
 ```bash
-bash examples/models/tensor_parallel.sh
+python probing/vlm_probe_data_gen.py
 ```
-
-**Evaluation with SGLang for bigger model (llava-next-72b)**
+Then, please switch to the standard Qwen evaluation conda environment and generate the image features from the last layer of LLM using the following command:
 
 ```bash
-bash examples/models/sglang.sh
+python probing/vlm_probe_data_gen_llm.py
 ```
-
-**Evaluation with vLLM for bigger model (llava-next-72b)**
+After generating the features, you can run the following command to perform linear probing:
 
 ```bash
-bash examples/models/vllm_qwen2vl.sh
+bash scripts/vlm_probing.sh # Please specify the feature you want to probe
 ```
 
-**More Parameters**
+### Text Probing
+Please use the standard Qwen evaluation conda environment and run the following command to generate the text features:
 
 ```bash
-python3 -m lmms_eval --help
+python probing/text_probing_data_gen.py # you can change prompt template in the script
 ```
 
-**Environmental Variables**
-Before running experiments and evaluations, we recommend you to export following environment variables to your environment. Some are necessary for certain tasks to run.
+Then, please run the following command to perform linear probing:
 
 ```bash
-export OPENAI_API_KEY="<YOUR_API_KEY>"
-export HF_HOME="<Path to HF cache>" 
-export HF_TOKEN="<YOUR_API_KEY>"
-export HF_HUB_ENABLE_HF_TRANSFER="1"
-export REKA_API_KEY="<YOUR_API_KEY>"
-# Other possible environment variables include 
-# ANTHROPIC_API_KEY,DASHSCOPE_API_KEY etc.
+bash scripts/llm_probing.sh # Please specify the feature you want to probe
 ```
+## Finetuning
 
-**Common Environment Issues**
+Our finetuned checkpoints are at:
 
-Sometimes you might encounter some common issues for example error related to httpx or protobuf. To solve these issues, you can first try
+| **Model** | **Checkpoint** |
+|----------------------|------------|
+| Vision Insturction Finetuned | [Qwen2.5-VL-7B-Vision-Hie](https://huggingface.co/Captain1874/Qwen2.5-VL-7B-Vision-Hie) |
+| Text-only Insturction Finetuned | [Qwen2.5-VL-7B-Text-Hie](https://huggingface.co/Captain1874/Qwen2.5-VL-7B-Text-Hie) |
+
+
+
+### Vision Insturction Tuning
+
+Run the following command for finetuning on VQA tasks:
 
 ```bash
-python3 -m pip install httpx==0.23.3;
-python3 -m pip install protobuf==3.20;
-# If you are using numpy==2.x, sometimes may causing errors
-python3 -m pip install numpy==1.26;
-# Someties sentencepiece are required for tokenizer to work
-python3 -m pip install sentencepiece;
+bash finetuning/scripts/finetune_lora_vqa.sh
 ```
 
-## Add Customized Model and Dataset
+### Text Insturction Tuning
 
-Please refer to our [documentation](docs/README.md).
+Run the following command for finetuning on text classification tasks:
 
-## Acknowledgement
+```bash
+bash finetuning/scripts/finetune_lora_text.sh
+``` 
 
-lmms_eval is a fork of [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-harness). We recommend you to read through the [docs of lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-harness/tree/main/docs) for relevant information. 
+### Merge LoRA Weights
 
----
+Run the following command for merging LoRA weights:
 
-Below are the changes we made to the original API:
-- Build context now only pass in idx and process image and doc during the model responding phase. This is due to the fact that dataset now contains lots of images and we can't store them in the doc like the original lm-eval-harness other wise the cpu memory would explode.
-- Instance.args (lmms_eval/api/instance.py) now contains a list of images to be inputted to lmms.
-- lm-eval-harness supports all HF language models as single model class. Currently this is not possible of lmms because the input/output format of lmms in HF are not yet unified. Thererfore, we have to create a new class for each lmms model. This is not ideal and we will try to unify them in the future.
----
+```bash
+bash finetuning/scripts/merge_lora.sh # Please specify the model name and the path to the merged model
+```
 
-## Citations
+## Evaluation on General VQA Benchmarks
 
-```shell
-@misc{zhang2024lmmsevalrealitycheckevaluation,
-      title={LMMs-Eval: Reality Check on the Evaluation of Large Multimodal Models}, 
-      author={Kaichen Zhang and Bo Li and Peiyuan Zhang and Fanyi Pu and Joshua Adrian Cahyono and Kairui Hu and Shuai Liu and Yuanhan Zhang and Jingkang Yang and Chunyuan Li and Ziwei Liu},
-      year={2024},
-      eprint={2407.12772},
+After installing the [VLMEvalKit](https://github.com/open-compass/VLMEvalKit), register your selected checkpoint in the `VLMEvalKit/vlmeval/config.py` and then run the following command for evaluation on MME, MMBench and SEED-Bench (you might also want to setup your openai api key in the `.env` file):
+
+```bash
+python run.py --data MMBench_DEV_EN MME SEEDBench_IMG --verbose --model Qwen2.5-VL-7B-Instruct-Ours # replace the model name with your registered checkpoint
+```
+
+## Citation
+
+Please cite us if you use this repository in your work.
+
+```bibtex
+@misc{tan2025visionllmsbadhierarchical,
+      title={Vision LLMs Are Bad at Hierarchical Visual Understanding, and LLMs Are the Bottleneck}, 
+      author={Yuwen Tan and Yuan Qing and Boqing Gong},
+      year={2025},
+      eprint={2505.24840},
       archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2407.12772}, 
-}
-
-@misc{lmms_eval2024,
-    title={LMMs-Eval: Accelerating the Development of Large Multimoal Models},
-    url={https://github.com/EvolvingLMMs-Lab/lmms-eval},
-    author={Bo Li*, Peiyuan Zhang*, Kaichen Zhang*, Fanyi Pu*, Xinrun Du, Yuhao Dong, Haotian Liu, Yuanhan Zhang, Ge Zhang, Chunyuan Li and Ziwei Liu},
-    publisher    = {Zenodo},
-    version      = {v0.1.0},
-    month={March},
-    year={2024}
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2505.24840}, 
 }
 ```
