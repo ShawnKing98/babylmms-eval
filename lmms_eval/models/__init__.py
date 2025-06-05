@@ -15,6 +15,7 @@ AVAILABLE_MODELS = {
     "plm": "PerceptionLM",
     "aria": "Aria",
     "auroracap": "AuroraCap",
+    "babyllava": "BabyLlava",
     "batch_gpt4": "BatchGPT4",
     "claude": "Claude",
     "cogvlm2": "CogVLM2",
