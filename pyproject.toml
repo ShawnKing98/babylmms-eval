@@ -21,10 +21,10 @@ classifiers = [
 requires-python = ">=3.8"
 license = { text = "MIT" }
 dependencies = [
-    "accelerate>=0.29.1",
+    "accelerate==0.27.2",
     "black==24.1.0",
     "isort==5.13.2",
-    "datasets==2.16.1",
+    "datasets==2.21.0",
     "evaluate>=0.4.0",
     "httpx==0.23.3",
     "jsonlines",
@@ -62,7 +62,7 @@ dependencies = [
     "openpyxl",
     "loguru",
     "hf_transfer",
-    "tenacity==8.3.0",
+    "tenacity==8.5.0",
     "wandb>=0.16.0",
     "tiktoken",
     "pre-commit",
@@ -71,7 +71,7 @@ dependencies = [
     "decord; platform_system != 'Darwin'",
     "eva-decord; platform_system == 'Darwin'",
     "zss",
-    "protobuf==3.20",
+    "protobuf==5.27.3",
     "sentence_transformers",
     "python-dotenv",
 ]
