@@ -58,7 +58,7 @@ accelerate launch --num_processes=1 -m lmms_eval \
     --model_args pretrained=liuhaotian/llava-v1.5-7b,conv_template=plain \
     --task vtwt,labeled_s,baby_winoground,saycam_caption \
     --batch_size 16 \
-    --output_path ./logs/
+    --output_path ./logs \
     --trust_remote_code
 ```
 **Evaluation of BabyLLaVA on BabyVLM tasks**
@@ -68,7 +68,7 @@ accelerate launch --num_processes=1 -m lmms_eval \
     --model_args pretrained=wsashawn/babyllava_resnext_gpt2,conv_template=plain \
     --task vtwt,labeled_s,baby_winoground,saycam_caption \
     --batch_size 16 \
-    --output_path ./logs/
+    --output_path ./logs \
     --trust_remote_code
 ```
 More detail about the usage of this package can be found at the original [lmms-eval repository](https://github.com/EvolvingLMMs-Lab/lmms-eval).
