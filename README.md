@@ -16,8 +16,6 @@
 
 This is the codebase of BabyVLM evaluation suite, integrated with the [lmms-eval](https://github.com/EvolvingLMMs-Lab/lmms-eval/) framework. Specifically, this repository provides four extra evaluation tasks (*Labeled-S, Visual Two-Word Test, Baby Winoground, SAYCam Caption*) and implementes the model wrapper for BabyLLaVA series in the paper.
 
-<!-- Human infants rapidly develop visual reasoning skills from minimal input, suggesting that developmentally inspired pretraining could significantly enhance the efficiency of vision-language models (VLMs). Although recent efforts have leveraged infant-inspired datasets like SAYCam, existing evaluation benchmarks remain misaligned--they are either too simplistic, narrowly scoped, or tailored for large-scale pretrained models. Additionally, training exclusively on infant data overlooks the broader, diverse input from which infants naturally learn. To address these limitations, we propose BabyVLM, a novel framework comprising comprehensive in-domain evaluation benchmarks and a synthetic training dataset created via child-directed transformations of existing datasets. We demonstrate that VLMs trained with our synthetic dataset achieve superior performance on BabyVLM tasks compared to models trained solely on SAYCam or general-purpose data of the SAYCam size. BabyVLM thus provides a robust, developmentally aligned evaluation tool and illustrates how compact models trained on carefully curated data can generalize effectively, opening pathways toward data-efficient vision-language learning paradigms. -->
-
 ## Environment Setup
 
 Install this package by cloning the repository and running the following command:
@@ -25,6 +23,8 @@ Install this package by cloning the repository and running the following command
 ```bash
 git clone https://github.com/ShawnKing98/babylmms-eval.git
 cd babylmms-eval
+conda create -n babyvlm python=3.10
+conda activate babyvlm
 pip install -e .
 ```
 
@@ -58,7 +58,7 @@ accelerate launch --num_processes=1 -m lmms_eval \
     --model_args pretrained=liuhaotian/llava-v1.5-7b,conv_template=plain \
     --task vtwt,labeled_s,baby_winoground,saycam_caption \
     --batch_size 16 \
-    --output_path ./logs/
+    --output_path ./logs \
     --trust_remote_code
 ```
 **Evaluation of BabyLLaVA on BabyVLM tasks**
@@ -68,7 +68,7 @@ accelerate launch --num_processes=1 -m lmms_eval \
     --model_args pretrained=wsashawn/babyllava_resnext_gpt2,conv_template=plain \
     --task vtwt,labeled_s,baby_winoground,saycam_caption \
     --batch_size 16 \
-    --output_path ./logs/
+    --output_path ./logs \
     --trust_remote_code
 ```
 More detail about the usage of this package can be found at the original [lmms-eval repository](https://github.com/EvolvingLMMs-Lab/lmms-eval).

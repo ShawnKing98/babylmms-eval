@@ -174,7 +174,6 @@ class BabyLlava(lmms):
 
     def loglikelihood(self, requests: List[Instance]) -> List[Tuple[float, bool]]:
         # TODO: Implement using your custom scoring logic if needed
-        # TODO
         res = []
         pbar = tqdm(total=len(requests), disable=(self.rank != 0), desc="Model Responding")
 
