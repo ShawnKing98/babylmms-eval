@@ -6,8 +6,8 @@
 
 [Shengao Wang](https://www.linkedin.com/in/shengao-wang-a259aa173/en)<sup>1</sup>,
 [Arjun Chandra](https://www.linkedin.com/in/arjun-chandra2/)<sup>1</sup>,
-[Aoming Liu](https://cs-people.bu.edu/amliu/)<sup>1</sup>
-[Venkatesh Saligrama](https://venkatesh-saligrama.github.io/)<sup>1</sup>
+[Aoming Liu](https://cs-people.bu.edu/amliu/)<sup>1</sup>,
+[Venkatesh Saligrama](https://venkatesh-saligrama.github.io/)<sup>1</sup>,
 [Boqing Gong](http://boqinggong.info/)<sup>1</sup>
 
 <sup>1</sup>Boston University
