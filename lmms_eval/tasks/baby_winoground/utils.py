@@ -39,7 +39,7 @@ def baby_winoground_process_results(doc, results):
         scores = {"img1_phrase0_loss": results[0][0], "img1_phrase1_loss": results[1][0], "instance_id": doc["instance_id"]}
     else:
         raise ValueError(f"Invalid image tag: {doc['image_tag']}")
-    return {"image_score": scores, "text_score": scores, "group_score": scores}
+    return {"image_score": scores, "text_score": scores, "positive_context_group_score": scores, "negative_context_group_score": scores, "group_score": scores}
 
 def get_loss_matrix(items):
     losses = [{} for _ in range(len(items) // 2)]
@@ -65,6 +65,16 @@ def baby_winoground_aggregate_text_score(items):
     loss_matrix = get_loss_matrix(items)
     text_score = (loss_matrix[:, 0, 0] < loss_matrix[:, 0, 1]) & (loss_matrix[:, 1, 1] < loss_matrix[:, 1, 0])
     return text_score.float().mean().item()
+
+def baby_winoground_aggregate_positive_context_group_score(items):
+    loss_matrix = get_loss_matrix(items)
+    positive_context_group_score = (loss_matrix[:, 0, 0] < loss_matrix[:, 1, 0]) & (loss_matrix[:, 0, 0] < loss_matrix[:, 0, 1])
+    return positive_context_group_score.float().mean().item()
+
+def baby_winoground_aggregate_negative_context_group_score(items):
+    loss_matrix = get_loss_matrix(items)
+    negative_context_group_score = (loss_matrix[:, 1, 1] < loss_matrix[:, 0, 1]) & (loss_matrix[:, 1, 1] < loss_matrix[:, 1, 0])
+    return negative_context_group_score.float().mean().item()
 
 def baby_winoground_aggregate_group_score(items):
     loss_matrix = get_loss_matrix(items)

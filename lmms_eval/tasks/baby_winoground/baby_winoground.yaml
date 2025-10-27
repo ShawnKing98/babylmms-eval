@@ -17,6 +17,12 @@ metric_list:
   - metric: text_score
     aggregation: !function utils.baby_winoground_aggregate_text_score
     higher_is_better: true
+  - metric: positive_context_group_score
+    aggregation: !function utils.baby_winoground_aggregate_positive_context_group_score
+    higher_is_better: true
+  - metric: negative_context_group_score
+    aggregation: !function utils.baby_winoground_aggregate_negative_context_group_score
+    higher_is_better: true
   - metric: group_score
     aggregation: !function utils.baby_winoground_aggregate_group_score
     higher_is_better: true
